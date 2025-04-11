@@ -6,3 +6,24 @@ body{
     font-family: 'SolaimanLipi', sans-serif;
     font-weight: 100;
 }
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: red;
+
+}
+.shadow-css {
+    box-shadow: 0px 1px 10px rgb(167, 167, 167);
+}
+/* Set custom scrollbar width */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 7px;  /* for vertical scrollbar */
+    height: 7px; /* for horizontal scrollbar */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #92bac491;
+    border-radius: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background:#e7f2fd;
+  }

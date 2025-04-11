@@ -11,7 +11,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       </div>
       <div className=" flex h-[calc(100vh-4rem)]">
         
-        <div className=" max-md:hidden  text-nowrap overflow-y-scroll">
+        <div className=" max-md:hidden w-[22%] custom-scrollbar text-nowrap overflow-y-scroll">
           <SideBar />
         </div>
 

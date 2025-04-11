@@ -1,7 +1,6 @@
 "use client";
 import { FaUserCircle, FaSignOutAlt } from "react-icons/fa";
-import { MdNotificationsNone } from "react-icons/md";
-import { HiOutlineMenuAlt2 } from "react-icons/hi";
+
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { addMenuFlag } from "@/utils/redux/slices/slice";
@@ -10,6 +9,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation"; // For navigating after logout
 import swal from "sweetalert"; // Import sweetalert
+import { IoIosMenu } from "react-icons/io";
+import { IoCaretDownSharp } from "react-icons/io5";
+import { IoMdNotificationsOutline } from "react-icons/io";
 
 const Nav: React.FC = () => {
   const [user, setUser] = useState<any>(null);
@@ -64,17 +66,17 @@ const Nav: React.FC = () => {
   };
 
   return (
-    <div>
-      <div className="w-full h-16 bg-[#e7f2fd] shadow flex items-center justify-between px-4 md:px-6 sticky top-0 z-50">
+    <div className="">
+      <div className="w-full h-[54px] bg-[#e7f2fd] shadow flex items-center justify-between px-4 md:px-6 sticky top-0 z-50">
         {/* Left: Logo or Menu button */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           <button
             onClick={() => {
               handleMenuToggle();
             }}
             className="text-2xl text-blue-600 hover:text-blue-800"
           >
-            <HiOutlineMenuAlt2 />
+            <IoIosMenu />
           </button>
 
           <div className=" flex items-center gap-2">
@@ -83,41 +85,51 @@ const Nav: React.FC = () => {
               alt="logo"
               width={500}
               height={500}
-              className=" w-10 h-10"
+              className=" w-[35px] h-[35px]"
             />
 
-            <h1 className="text-[22px] font-serif font-bold tracking-wide text-[#4154f1] hidden md:block">
+            <h1 className="text-[22px] font-serif font-bold -tracking-[1px] text-[#4154f1] hidden md:block">
               OUR-DENMARK
             </h1>
           </div>
         </div>
 
         {/* Right: Icons and Profile */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6">
+          <div className=" bg-blue-600 text-white px-3 py-2 rounded-md">
+            টাকা - 1524
+          </div>
+
           <button className="relative text-2xl text-blue-700 hover:text-blue-900">
-            <MdNotificationsNone />
+            <IoMdNotificationsOutline />
             <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
           </button>
 
           {/* Display user image or login button */}
           {user ? (
-            <div
-              className="flex items-center gap-2 cursor-pointer"
-              onClick={() => setSidebarVisible(!sidebarVisible)} // Toggle sidebar visibility
-            >
-              <Image
-                src={user?.image || "/default-avatar.png"} // fallback image if user doesn't have one
-                alt="User Image"
-                width={40}
-                height={40}
-                className="rounded-full object-cover"
-              />
-              <span className="hidden md:block text-sm font-medium text-gray-800">
-                {user?.name || "Admin"}
-              </span>
+            <div className=" flex gap-1 items-center">
+              <div
+                onClick={() => setSidebarVisible(!sidebarVisible)}
+                className="flex items-center gap-2 cursor-pointer"
+                // Toggle sidebar visibility
+              >
+                <Image
+                  src={user?.image || "/default-avatar.png"} // fallback image if user doesn't have one
+                  alt="User Image"
+                  width={500}
+                  height={500}
+                  className=" w-[35px] h-[35px] rounded-full object-cover"
+                />
+
+                <button className="relative text-black hover:text-blue-900">
+                  <IoCaretDownSharp
+                    className={`${sidebarVisible && "rotate-180"}`}
+                  />
+                </button>
+              </div>
             </div>
           ) : (
-            <Link href="/login">
+            <Link href="/user/login">
               <button className="text-sm font-medium text-blue-600 hover:text-blue-800">
                 Login
               </button>
@@ -147,7 +159,7 @@ const Nav: React.FC = () => {
 
               <Link href="/pages">
                 <div className="flex items-center gap-2 text-gray-800 hover:text-blue-600">
-                  <HiOutlineMenuAlt2 />
+                  <IoIosMenu />
                   <span>Pages</span>
                 </div>
               </Link>

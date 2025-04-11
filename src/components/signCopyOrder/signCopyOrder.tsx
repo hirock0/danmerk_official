@@ -1,37 +1,50 @@
 // components/SignCopyOrder.tsx
-import React from 'react';
-import { FaDownload } from 'react-icons/fa';
-
-const SignCopyOrder = () => {
+import React from "react";
+import { Nunito } from "next/font/google";
+const nunito = Nunito({
+  subsets: ["latin"],
+});
+const SignCopyOrder = ({ textTitle }: { textTitle: string }) => {
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <div className="bg-white shadow-lg rounded-lg p-6 text-center">
-        <h1 className="text-2xl font-bold text-purple-600">Sign Copy Order</h1>
-        <div className="mt-4">
-          <label htmlFor="amount" className="block text-gray-700">
-            সাইন কপি - 100 টাকা
+    <div className={` py-10`}>
+      <div className="bg-white w-[450px] mx-auto shadow-css rounded-lg p-6 text-center">
+        <h1
+          className={`${nunito.className} font-extrabold text-[32px] bg-gradient-to-r from-purple-700 via-red-400 to-red-500 inline-block text-transparent bg-clip-text`}
+        >
+          {textTitle}
+        </h1>
+
+        <select
+          id="amount"
+          className="mt-4 h-[38px] bg-zinc-200 rounded-lg px-2   border border-gray-300  w-full"
+        >
+          <option value="">সাইন কপি - 100 টাকা</option>
+          {/* Add more options here */}
+        </select>
+
+        <div className="mt-4 ">
+          <label htmlFor="type" className="block text-gray-700">
+            Select Type
           </label>
-          <select id="amount" className="mt-2 p-2 border border-gray-300 rounded">
+
+          <select
+            id="amount"
+            className=" mt-4 border-2 focus:border-[#92bac491] focus:border-4 transition-all rounded-lg px-2 w-full h-[38px]"
+          >
             <option value="">Select Amount</option>
             {/* Add more options here */}
           </select>
         </div>
-        <div className="mt-4">
-          <label htmlFor="type" className="block text-gray-700">
-            Select Type
-          </label>
-          <select id="type" className="mt-2 p-2 border border-gray-300 rounded">
-            <option value="">Select Type</option>
-            {/* Add more options here */}
-          </select>
-        </div>
-        <p className="mt-4 text-gray-500">
+        <p
+          className={`${nunito.className} mt-4 text-[20px] text-green-600 font-bold`}
+        >
           Note: You will be charged 100 tk for Sign Copy Order!
         </p>
-        <button className="mt-4 bg-purple-600 text-white px-4 py-2 rounded flex items-center justify-center">
-          <FaDownload className="mr-2" />
-          Save & Download
-        </button>
+        <div className=" w-full flex items-center justify-center ">
+          <button className="mt-4 bg-gradient-to-r from-[#7f00ff] to-[#e100ff] text-white px-4 py-2 rounded flex items-center justify-center">
+            Save & Download
+          </button>
+        </div>
       </div>
 
       <div className="mt-8">
@@ -46,7 +59,9 @@ const SignCopyOrder = () => {
             </select>
           </div>
           <div>
-            <label htmlFor="sort" className="mr-2">Sort by:</label>
+            <label htmlFor="sort" className="mr-2">
+              Sort by:
+            </label>
             <select id="sort" className="p-2 border border-gray-300 rounded">
               <option value="newest">Newest First</option>
               <option value="oldest">Oldest First</option>
@@ -66,7 +81,9 @@ const SignCopyOrder = () => {
           </thead>
           <tbody>
             <tr>
-              <td colSpan={5} className="py-2 text-center">No records found.</td>
+              <td colSpan={5} className="py-2 text-center">
+                No records found.
+              </td>
             </tr>
           </tbody>
         </table>

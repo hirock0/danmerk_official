@@ -1,18 +1,13 @@
 "use client";
 
 import {
-  FaChevronLeft,
   FaChevronRight,
-  FaCopy,
-  FaIdCard,
   FaBars,
 } from "react-icons/fa";
 import {
-  MdDashboard,
   MdOutlineLocalPhone,
   MdOutlineLanguage,
 } from "react-icons/md";
-import { HiOutlineDocumentDuplicate } from "react-icons/hi2";
 import { BsFillPersonFill } from "react-icons/bs";
 import { TbReportAnalytics } from "react-icons/tb";
 import { useState } from "react";
@@ -20,6 +15,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaPowerOff, FaQuestionCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { BsCaretLeft } from "react-icons/bs";
+import { BsSpeedometer2 } from "react-icons/bs";
+import { IoDocumentTextOutline } from "react-icons/io5";
+import { RiFileCopyLine } from "react-icons/ri";
+import { FaIdCard } from "react-icons/fa6";
 interface SubmenuItem {
   label: string;
   href: string;
@@ -39,11 +39,11 @@ const SideBar: React.FC = () => {
   const pathname = usePathname(); // 👈 get current path
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const menuItems: MenuItem[] = [
-    { icon: <MdDashboard />, label: "অর্ডার ড্যাশবোর্ড", href: "/dashboard" },
-    { icon: <FaChevronLeft />, label: "ফিরে যান", href: "#" },
-    { icon: <FaCopy />, label: "সাইন কপি অর্ডার", href: "/sign-copy" },
+    { icon: <BsSpeedometer2/>, label: "অর্ডার ড্যাশবোর্ড", href: "/dashboard" },
+    { icon: <BsCaretLeft/>, label: "ফিরে যান", href: "#" },
+    { icon: <IoDocumentTextOutline />, label: "সাইন কপি অর্ডার", href: "/sign-copy" },
     {
-      icon: <HiOutlineDocumentDuplicate />,
+      icon: <RiFileCopyLine />,
       label: "সার্ভার কপি অর্ডার",
       href: "/server-copy-order",
     },
@@ -135,14 +135,14 @@ const SideBar: React.FC = () => {
 
   return (
     <div
-      className={` bg-[#e7f2fd] px-10 text-zinc-500 text-[17px]  ${
-        selectorData ? " w-20" : "w-80 "
+      className={` bg-[#e7f2fd]  text-zinc-500 text-[17px]  ${
+        selectorData ? " w-20" : " "
       } duration-300 p-4`}
     >
-      <div className="flex items-center justify-between my-8 ">
+      <div className="flex items-center justify-between my-5 ">
         <h2 className="text-xl ">{!selectorData && "Dashboard"}</h2>
       </div>
-      <nav className="flex flex-col">
+      <nav className="flex flex-col gap-2">
         {menuItems.map((item, index) => {
           const isActive = item.href && pathname === item.href;
           const isSubActive =
@@ -151,15 +151,15 @@ const SideBar: React.FC = () => {
           return (
             <div key={index} className="relative rounded-md">
               <button
-                className={`flex items-center  justify-between rounded-md transition  px-3 py-4 ${
+                className={`flex items-center  justify-between rounded-md transition  px-3 py-2 ${
                   isActive || isSubActive
-                    ? "bg-blue-600 text-white   font-semibold"
+                    ? "bg-blue-600 text-white "
                     : " hover:bg-blue-200"
                 }`}
                 onClick={() => item.hasSubmenu && toggleSubmenu(item.label)}
               >
-                <div className="flex items-center space-x-2">
-                  <span className="text-xl">{item.icon}</span>
+                <div className="flex items-center space-x-8">
+                  <span className="text-2xl font-bold">{item.icon}</span>
                   {!selectorData && <span>{item.label}</span>}
                 </div>
 
@@ -213,7 +213,7 @@ const SideBar: React.FC = () => {
                   pathname === item?.href
                     ? "bg-blue-600  text-white font-semibold"
                     : " hover:bg-blue-200"
-                } flex items-center space-x-2 p-3 py-4   rounded cursor-pointer`}
+                } flex items-center px-3 py-2 space-x-8 rounded cursor-pointer`}
               >
                 <div className="">{item?.icon}</div>
                 {!selectorData && <span>{item?.label}</span>}
