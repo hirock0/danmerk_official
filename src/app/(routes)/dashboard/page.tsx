@@ -3,6 +3,7 @@
 "use client";
 
 import DashboardCard from "@/components/dashboardCard/dashboardCard";
+import HeadLineSlide from "@/components/headLineSlide/headLineSlide";
 
 const DashboardPage = () => {
   const cards = [
@@ -96,15 +97,21 @@ const DashboardPage = () => {
   ];
 
   return (
-    <div className="p-6 w-full grid gap-6  max-lg:grid-cols-2 grid-cols-3 max-sm:grid-cols-1">
-      {cards.map((card, index) => (
-        <DashboardCard
-          key={index}
-          count={card.count}
-          title={card.title}
-          buttonText={card.buttonText}
-        />
-      ))}
+    <div className=" ">
+      <div className=" ">
+        <HeadLineSlide headline={["This is a","Thus sds", "dsfd  sad"]} />
+      </div>
+
+      <div className="px-6 pb-10  w-full grid gap-6  max-lg:grid-cols-2 grid-cols-3 max-sm:grid-cols-1">
+        {cards.map((card, index) => (
+          <DashboardCard
+            key={index}
+            count={card.count}
+            title={card.title}
+            buttonText={card.buttonText}
+          />
+        ))}
+      </div>
     </div>
   );
 };

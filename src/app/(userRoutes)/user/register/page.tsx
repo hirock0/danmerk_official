@@ -6,14 +6,17 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import swal from "sweetalert";
+import Image from "next/image";
 
 interface RegisterFormInputs {
   name: string;
   email: string;
   password: string;
   rePassword: string;
-  image: string | File;
+  userImage: string | File;
   termsChecked: boolean;
+  role: string;
+  flag: string;
 }
 
 const Register = () => {
@@ -54,25 +57,18 @@ const Register = () => {
   const onRegister = async (info: RegisterFormInputs) => {
     setLoader(true);
     try {
-      if (info.password === info.rePassword) {
-        const { rePassword, ...rest } = info;
+      (info.userImage = base64Image),
+        (info.flag = "normalAuth"),
+        (info.role = "user");
 
-        if (!base64Image) {
-          swal({
-            title: "Please upload a valid image",
-            icon: "warning",
-          });
-          setLoader(false);
-          return;
-        }
-
-        const payload = {
-          ...rest,
-          image: base64Image,
-          flag: "normalAuth",
-        };
-
-        const response = await axios.post(`/pages/api/users/register`, payload);
+      if (info.password !== info.rePassword) {
+        swal({
+          title: "Password not matched",
+          icon: "warning",
+        });
+        setLoader(false)
+      } else {
+        const response = await axios.post(`/pages/api/users/register`, info);
 
         if (response?.data?.success) {
           swal({
@@ -83,28 +79,17 @@ const Register = () => {
           router.push("/dashboard");
         } else {
           swal({
-            title: response.data.message,
+            title: response?.data?.message,
             icon: "warning",
           });
           setLoader(false);
         }
-      } else {
-        swal({
-          title: "Password is not matched",
-          icon: "warning",
-        });
-        setLoader(false);
       }
-    } catch (error: unknown) {
+    } catch (error: any) {
       setLoader(false);
-      const message =
-        axios.isAxiosError(error) && error.response?.data?.message
-          ? error.response.data.message
-          : (error as Error).message || "Something went wrong";
-
       swal({
         title: "Error",
-        text: message,
+        text: error?.message,
         icon: "error",
       });
     }
@@ -224,9 +209,11 @@ const Register = () => {
             className="w-full mt-2 p-2 border border-gray-300 rounded-md"
           />
           {previewImage && (
-            <img
+            <Image
               src={previewImage}
               alt="Preview"
+              width={500}
+              height={500}
               className="mt-2 h-24 w-24 object-cover rounded-md border"
             />
           )}

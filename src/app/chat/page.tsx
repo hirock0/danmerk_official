@@ -15,8 +15,8 @@ interface ServerMessage {
 }
 
 // Connect to the backend
-// const socket: any = io("http://api.udccenter.xyz");
-const socket: any = io("http://localhost:4000");
+const socket: any = io("http://api.udccenter.xyz");
+// const socket: any = io("http://localhost:4000");
 
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([]);

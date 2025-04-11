@@ -18,9 +18,7 @@ const Home = () => {
   return (
     <div>
       <Link href={"/dashboard"}>Dashboard</Link>
-
       <h1 className=" mt-20">Users here</h1>
-
       <div className="">
         {users?.map((user: any, index) => {
           return (

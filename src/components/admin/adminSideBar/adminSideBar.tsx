@@ -1,6 +1,7 @@
 import { FaFileAlt, FaServer, FaIdCard, FaFingerprint, FaPhone, FaMapMarkerAlt, FaUserLock, FaCheck, FaBan, FaSignOutAlt } from 'react-icons/fa';
 import Link from 'next/link';
 const menu = [
+    { label: 'Dashboard', icon: <FaFileAlt />, count: 1, href: '/admin/dashboard' },
   { label: 'Sign Copy Order', icon: <FaFileAlt />, count: 1, href: '/admin/dashboard/sign-copy' },
   { label: 'Server Copy Order', icon: <FaServer />, count: 5, href: '/admin/dashboard/sign-copy' },
   { label: 'NID Card Order', icon: <FaIdCard />, count: 1, href: '/admin/dashboard/sign-copy' },

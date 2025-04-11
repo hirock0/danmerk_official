@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { FaUserCircle, FaSignOutAlt } from "react-icons/fa";
 import { MdNotificationsNone } from "react-icons/md";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
@@ -54,7 +54,6 @@ const Nav: React.FC = () => {
         title: "Logout Successful",
         text: "You have been logged out successfully.",
         icon: "success",
-        
       }).then(() => {
         // Redirect to login page after the user acknowledges the SweetAlert
         router.push("/user/login");
@@ -78,9 +77,19 @@ const Nav: React.FC = () => {
             <HiOutlineMenuAlt2 />
           </button>
 
-          <h1 className="text-lg font-bold text-blue-800 hidden md:block">
-            OUR-DENMARK
-          </h1>
+          <div className=" flex items-center gap-2">
+            <Image
+              src={"https://order.denmarkofficial.online/images/logo.png"}
+              alt="logo"
+              width={500}
+              height={500}
+              className=" w-10 h-10"
+            />
+
+            <h1 className="text-[22px] font-serif font-bold tracking-wide text-[#4154f1] hidden md:block">
+              OUR-DENMARK
+            </h1>
+          </div>
         </div>
 
         {/* Right: Icons and Profile */}

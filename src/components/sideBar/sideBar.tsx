@@ -34,7 +34,6 @@ interface MenuItem {
 }
 
 const SideBar: React.FC = () => {
-
   const selectorData = useSelector((state: any) => state?.slices?.menuFlag);
 
   const pathname = usePathname(); // 👈 get current path
@@ -123,35 +122,38 @@ const SideBar: React.FC = () => {
     },
   ];
 
+  const settings = [
+    { icon: <BsFillPersonFill />, label: "প্রোফাইল", href: "/profile" },
+    { icon: <FaIdCard />, label: "পাসওয়ার্ড পরিবর্তন", href: "#" },
+    { icon: <FaQuestionCircle />, label: "সাপোর্ট", href: "#" },
+    { icon: <FaPowerOff />, label: "Logout", href: "#" },
+  ];
+
   const toggleSubmenu = (label: string) => {
     setOpenMenu(openMenu === label ? null : label);
   };
 
-
-
-
-
   return (
     <div
-      className={` bg-[#e7f2fd] px-10 text-zinc-600 text-[17px]  ${
-        selectorData ? " w-20" : ""
+      className={` bg-[#e7f2fd] px-10 text-zinc-500 text-[17px]  ${
+        selectorData ? " w-20" : "w-80 "
       } duration-300 p-4`}
     >
-      <div className="flex items-center justify-between my-8">
+      <div className="flex items-center justify-between my-8 ">
         <h2 className="text-xl ">{!selectorData && "Dashboard"}</h2>
       </div>
-      <nav className="flex flex-col  space-y-3">
+      <nav className="flex flex-col">
         {menuItems.map((item, index) => {
           const isActive = item.href && pathname === item.href;
           const isSubActive =
             item.submenu?.some((sub) => pathname === sub.href) ?? false;
 
           return (
-            <div key={index} className="relative">
+            <div key={index} className="relative rounded-md">
               <button
-                className={`flex w-full items-center justify-between rounded-md transition ${
+                className={`flex items-center  justify-between rounded-md transition  px-3 py-4 ${
                   isActive || isSubActive
-                    ? "bg-blue-300 text-blue-900 font-semibold"
+                    ? "bg-blue-600 text-white   font-semibold"
                     : " hover:bg-blue-200"
                 }`}
                 onClick={() => item.hasSubmenu && toggleSubmenu(item.label)}
@@ -201,27 +203,25 @@ const SideBar: React.FC = () => {
       {/* Bottom: Settings */}
       <div className="pt-6 mt-6 border-t border-blue-300 space-y-3">
         {!selectorData && <h2 className=" font-semibold">Setting</h2>}
-        <div className="space-y-3 ">
-          <div className="flex items-center space-x-2  hover:text-blue-700 cursor-pointer">
-            <BsFillPersonFill />
-            {!selectorData && <span>প্রোফাইল</span>}
-          </div>
-          <div className="flex items-center space-x-2  hover:text-blue-700 cursor-pointer">
-            <FaIdCard />
-            {!selectorData && <span>পাসওয়ার্ড পরিবর্তন</span>}
-          </div>
-          <div className="flex items-center space-x-2  hover:text-blue-700 cursor-pointer">
-            <FaQuestionCircle />
-            {!selectorData && <span>সাপোর্ট</span>}
-          </div>
-          <div className="flex items-center space-x-2  hover:text-red-600 cursor-pointer">
-            <FaPowerOff />
-            {!selectorData && <span>Logout</span>}
-          </div>
+        <div className=" ">
+          {settings.map((item: any, index) => (
+            <div className="" key={index}>
+              <Link
+                href={item?.href}
+                
+                className={` ${
+                  pathname === item?.href
+                    ? "bg-blue-600  text-white font-semibold"
+                    : " hover:bg-blue-200"
+                } flex items-center space-x-2 p-3 py-4   rounded cursor-pointer`}
+              >
+                <div className="">{item?.icon}</div>
+                {!selectorData && <span>{item?.label}</span>}
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
-
-
     </div>
   );
 };
