@@ -43,6 +43,7 @@ export async function POST(req: Request) {
     // Generate JWT token with the payload
     const tokenPayload = {
       id: user?._id,
+      name:user?.name,
       email: user?.email,
       role: user?.role,
       image: user?.image?.secure_url, // Assuming you store user images in `secure_url`

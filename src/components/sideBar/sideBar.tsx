@@ -136,7 +136,11 @@ const SideBar: React.FC = () => {
   };
 
   return (
-    <div className={` bg-[#e7f2fd]  text-zinc-500 text-[17px]   ${ selectorData ? " md:w-20" : " w-[320px]  "} duration-300 p-4`}>
+    <div
+      className={` bg-[#e7f2fd]  text-zinc-500 text-[17px]   ${
+        selectorData ? " md:w-20" : "  w-[320px] max-md:w-[250px]  "
+      } duration-300 p-4`}
+    >
       <div className="flex items-center justify-between my-5 ">
         <h2 className="text-xl ">{!selectorData && "Dashboard"}</h2>
       </div>
@@ -149,15 +153,15 @@ const SideBar: React.FC = () => {
           return (
             <div key={index} className="relative rounded-md">
               <button
-                className={`flex items-center  justify-between rounded-md transition w-9/12 px-3 py-2 ${
+                className={`flex items-center  justify-between rounded-md transition w-9/12 max-md:w-full px-3 py-2 ${
                   isActive || isSubActive
                     ? "bg-blue-600 text-white "
                     : " hover:bg-blue-200"
                 }`}
                 onClick={() => item.hasSubmenu && toggleSubmenu(item.label)}
               >
-                <div className="flex items-center space-x-8">
-                  <span className="text-2xl font-bold">{item.icon}</span>
+                <div className="flex items-center space-x-8 max-md:space-x-5">
+                  <span className="text-2xl ">{item.icon}</span>
                   {!selectorData && <span>{item.label}</span>}
                 </div>
 
@@ -199,9 +203,9 @@ const SideBar: React.FC = () => {
         })}
       </nav>
       {/* Bottom: Settings */}
-      <div className="pt-6 mt-6 border-t border-blue-300 space-y-3">
+      <div className="pt-6 mt-6 border-t border-blue-300 ">
         {!selectorData && <h2 className=" font-semibold">Setting</h2>}
-        <div className=" ">
+        <div className="rounded-md transition w-9/12 max-md:w-full  py-2 ">
           {settings.map((item: any, index) => (
             <div className="" key={index}>
               <Link
@@ -210,9 +214,9 @@ const SideBar: React.FC = () => {
                   pathname === item?.href
                     ? "bg-blue-600  text-white font-semibold"
                     : " hover:bg-blue-200"
-                } flex items-center px-3 py-2 space-x-8 rounded cursor-pointer`}
+                } flex items-center px-3 py-2 space-x-8 max-md:space-x-5 rounded cursor-pointer`}
               >
-                <div className="">{item?.icon}</div>
+                <div className="text-2xl">{item?.icon}</div>
                 {!selectorData && <span>{item?.label}</span>}
               </Link>
             </div>

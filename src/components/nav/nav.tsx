@@ -1,6 +1,4 @@
 "use client";
-import { FaUserCircle, FaSignOutAlt } from "react-icons/fa";
-
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { addMenuFlag } from "@/utils/redux/slices/slice";
@@ -13,6 +11,9 @@ import { IoIosMenu } from "react-icons/io";
 import { IoCaretDownSharp } from "react-icons/io5";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import SideBar from "../sideBar/sideBar";
+import { FiUser } from "react-icons/fi";
+import { FaUnlockAlt } from "react-icons/fa";
+import { BiPowerOff } from "react-icons/bi";
 
 const Nav: React.FC = () => {
   const [user, setUser] = useState<any>(null);
@@ -74,6 +75,15 @@ const Nav: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    const handler = () => {
+      setLeftSideBar(false), setSidebarVisible(false);
+    };
+    window.addEventListener("click", handler);
+    return () => {
+      window.removeEventListener("click", handler);
+    };
+  }, []);
   return (
     <div className="">
       <div className="w-full h-[54px] bg-[#e7f2fd] shadow flex items-center justify-between px-4 md:px-6 sticky top-0 z-50">
@@ -89,8 +99,8 @@ const Nav: React.FC = () => {
           </button>
 
           <button
-            onClick={() => {
-              handleMenuToggle2();
+            onClick={(e) => {
+              e.stopPropagation(), handleMenuToggle2();
             }}
             className="text-2xl md:hidden text-blue-600 hover:text-blue-800"
           >
@@ -127,12 +137,14 @@ const Nav: React.FC = () => {
           {user ? (
             <div className=" flex gap-1 items-center">
               <div
-                onClick={() => setSidebarVisible(!sidebarVisible)}
+                onClick={(e) => {
+                  e.stopPropagation(), setSidebarVisible(!sidebarVisible);
+                }}
                 className="flex items-center gap-2 cursor-pointer"
                 // Toggle sidebar visibility
               >
                 <Image
-                  src={user?.image || "/default-avatar.png"} // fallback image if user doesn't have one
+                  src={user?.image || "/default-avatar.png"}
                   alt="User Image"
                   width={500}
                   height={500}
@@ -156,47 +168,72 @@ const Nav: React.FC = () => {
         </div>
       </div>
 
-      <div className={`${!leftSideBar?" -translate-x-[110%] ":" translate-x-0"} transition-all fixed z-40 md:hidden left-0 top-[54px] h-[calc(100vh-54px)] custom-scrollbar overflow-y-scroll`}>
+      <div
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+        className={`${
+          !leftSideBar ? " -translate-x-[110%] " : " translate-x-0"
+        } transition-all fixed z-40 md:hidden left-0 top-[54px] h-[calc(100vh-54px)] custom-scrollbar overflow-y-scroll`}
+      >
         <SideBar />
       </div>
 
       {/* Sidebar */}
-      {sidebarVisible && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-40 flex justify-end">
-          <div className="bg-white w-64 h-full p-4 flex flex-col">
-            <button
-              className="text-xl text-blue-700 hover:text-blue-900 mb-4"
-              onClick={() => setSidebarVisible(false)} // Close sidebar
-            >
-              X
-            </button>
 
-            <div className="flex flex-col gap-6">
-              <Link href="/profile">
-                <div className="flex items-center gap-2 text-gray-800 hover:text-blue-600">
-                  <FaUserCircle />
-                  <span>Profile</span>
-                </div>
-              </Link>
+      <div
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+        className={`${
+          !sidebarVisible ? "hidden" : "block"
+        } transition-all fixed top-[60px] right-5 rounded-lg overflow-hidden bg-white w-52  shadow-lg z-40 `}
+      >
+        <div className="bg-white h-full  flex flex-col">
+          <div className="flex flex-col ">
+            <Link href="/profile">
+              <div className="flex p-4 items-center gap-2 border-b-2 py-4 text-blue-600">
+                <Image
+                  src={user?.image || "/default-avatar.png"}
+                  alt="user"
+                  width={500}
+                  height={500}
+                  className=" w-8 h-8 rounded-full"
+                />
+                <span>{user?.name}</span>
+              </div>
+            </Link>
 
+            <div className="hover:bg-slate-200/50 ">
               <Link href="/pages">
-                <div className="flex items-center gap-2 text-gray-800 hover:text-blue-600">
-                  <IoIosMenu />
-                  <span>Pages</span>
+                <div className="flex p-4 hover:text-blue-600 items-center gap-2 text-gray-800  py-4 ">
+                  <FiUser size={20} />
+                  <span>My Profile</span>
                 </div>
               </Link>
+            </div>
 
+            <div className="hover:bg-slate-200/50 ">
+              <Link href="/pages">
+                <div className="flex p-4 items-center gap-2 hover:text-blue-600 text-gray-800 border-b-2 pb-4 ">
+                  <FaUnlockAlt size={20} />
+                  <span>Password</span>
+                </div>
+              </Link>
+            </div>
+
+            <div className="hover:bg-slate-200/50">
               <div
-                className="flex items-center gap-2 text-gray-800 hover:text-blue-600 cursor-pointer"
+                className="flex p-4 items-center gap-2 text-gray-800  hover:text-blue-600 cursor-pointer py-4"
                 onClick={handleLogout}
               >
-                <FaSignOutAlt />
+                <BiPowerOff size={20} />
                 <span>Logout</span>
               </div>
             </div>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };
