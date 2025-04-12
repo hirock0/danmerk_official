@@ -1,29 +1,53 @@
-@import url('https://fonts.cdnfonts.com/css/solaimanlipi');
+@import url("https://fonts.cdnfonts.com/css/solaimanlipi");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body{
-    font-family: 'SolaimanLipi', sans-serif;
-    font-weight: 100;
+body {
+  font-family: "SolaimanLipi", sans-serif;
+  font-weight: 100;
 }
 .custom-scrollbar::-webkit-scrollbar-track {
-    background: red;
-
+  background: red;
 }
 .shadow-css {
-    box-shadow: 0px 1px 10px rgb(167, 167, 167);
+  box-shadow: 0px 1px 10px rgb(167, 167, 167);
 }
 /* Set custom scrollbar width */
 .custom-scrollbar::-webkit-scrollbar {
-    width: 7px;  /* for vertical scrollbar */
-    height: 7px; /* for horizontal scrollbar */
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #92bac491;
-    border-radius: 8px;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background:#e7f2fd;
-  }
+  width: 7px; /* for vertical scrollbar */
+  height: 7px; /* for horizontal scrollbar */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #92bac491;
+  border-radius: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #e7f2fd;
+}
+.btn_shadow {
+  box-shadow: 0px 0px 10px 0px rgba(76, 226, 253, 0.815);
+}
+.content-holder .circle::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  width: 100px;
+  height: 20px;
+  background-color: #fff;
+  border-bottom: 5px solid #007bff;
+  border-radius: 50%;
+}
+
+.parabolic::after {
+  content: "";
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  bottom: -10%;
+  height: 25px;
+  border-radius: 100%;
+  background-color: white;
+  border-bottom: solid 6px #007bff;
+}
