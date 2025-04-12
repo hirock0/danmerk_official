@@ -12,11 +12,12 @@ import swal from "sweetalert"; // Import sweetalert
 import { IoIosMenu } from "react-icons/io";
 import { IoCaretDownSharp } from "react-icons/io5";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import SideBar from "../sideBar/sideBar";
 
 const Nav: React.FC = () => {
   const [user, setUser] = useState<any>(null);
   const [sidebarVisible, setSidebarVisible] = useState(false); // State to control sidebar visibility
-
+  const [leftSideBar, setLeftSideBar] = useState<boolean>(false);
   const selectorData = useSelector((state: any) => state?.slices?.menuFlag);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -26,6 +27,14 @@ const Nav: React.FC = () => {
       dispatch(addMenuFlag(true));
     } else {
       dispatch(addMenuFlag(false));
+    }
+  };
+
+  const handleMenuToggle2 = () => {
+    if (!leftSideBar) {
+      setLeftSideBar(true);
+    } else {
+      setLeftSideBar(false);
     }
   };
 
@@ -74,7 +83,16 @@ const Nav: React.FC = () => {
             onClick={() => {
               handleMenuToggle();
             }}
-            className="text-2xl text-blue-600 hover:text-blue-800"
+            className="text-2xl max-md:hidden text-blue-600 hover:text-blue-800"
+          >
+            <IoIosMenu />
+          </button>
+
+          <button
+            onClick={() => {
+              handleMenuToggle2();
+            }}
+            className="text-2xl md:hidden text-blue-600 hover:text-blue-800"
           >
             <IoIosMenu />
           </button>
@@ -136,6 +154,10 @@ const Nav: React.FC = () => {
             </Link>
           )}
         </div>
+      </div>
+
+      <div className={`${!leftSideBar?" -translate-x-[110%] ":" translate-x-0"} transition-all fixed z-40 md:hidden left-0 top-[54px] h-[calc(100vh-54px)] custom-scrollbar overflow-y-scroll`}>
+        <SideBar />
       </div>
 
       {/* Sidebar */}

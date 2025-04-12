@@ -1,13 +1,7 @@
 "use client";
 
-import {
-  FaChevronRight,
-  FaBars,
-} from "react-icons/fa";
-import {
-  MdOutlineLocalPhone,
-  MdOutlineLanguage,
-} from "react-icons/md";
+import { FaChevronRight, FaBars } from "react-icons/fa";
+import { MdOutlineLocalPhone, MdOutlineLanguage } from "react-icons/md";
 import { BsFillPersonFill } from "react-icons/bs";
 import { TbReportAnalytics } from "react-icons/tb";
 import { useState } from "react";
@@ -39,9 +33,17 @@ const SideBar: React.FC = () => {
   const pathname = usePathname(); // 👈 get current path
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const menuItems: MenuItem[] = [
-    { icon: <BsSpeedometer2/>, label: "অর্ডার ড্যাশবোর্ড", href: "/dashboard" },
-    { icon: <BsCaretLeft/>, label: "ফিরে যান", href: "#" },
-    { icon: <IoDocumentTextOutline />, label: "সাইন কপি অর্ডার", href: "/sign-copy" },
+    {
+      icon: <BsSpeedometer2 />,
+      label: "অর্ডার ড্যাশবোর্ড",
+      href: "/dashboard",
+    },
+    { icon: <BsCaretLeft />, label: "ফিরে যান", href: "#" },
+    {
+      icon: <IoDocumentTextOutline />,
+      label: "সাইন কপি অর্ডার",
+      href: "/sign-copy",
+    },
     {
       icon: <RiFileCopyLine />,
       label: "সার্ভার কপি অর্ডার",
@@ -134,11 +136,7 @@ const SideBar: React.FC = () => {
   };
 
   return (
-    <div
-      className={` bg-[#e7f2fd]  text-zinc-500 text-[17px]  ${
-        selectorData ? " w-20" : " "
-      } duration-300 p-4`}
-    >
+    <div className={` bg-[#e7f2fd]  text-zinc-500 text-[17px]   ${ selectorData ? " md:w-20" : " w-[320px]  "} duration-300 p-4`}>
       <div className="flex items-center justify-between my-5 ">
         <h2 className="text-xl ">{!selectorData && "Dashboard"}</h2>
       </div>
@@ -151,7 +149,7 @@ const SideBar: React.FC = () => {
           return (
             <div key={index} className="relative rounded-md">
               <button
-                className={`flex items-center  justify-between rounded-md transition  px-3 py-2 ${
+                className={`flex items-center  justify-between rounded-md transition w-9/12 px-3 py-2 ${
                   isActive || isSubActive
                     ? "bg-blue-600 text-white "
                     : " hover:bg-blue-200"
@@ -208,7 +206,6 @@ const SideBar: React.FC = () => {
             <div className="" key={index}>
               <Link
                 href={item?.href}
-                
                 className={` ${
                   pathname === item?.href
                     ? "bg-blue-600  text-white font-semibold"

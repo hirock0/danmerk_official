@@ -9,13 +9,11 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <div className="">
         <Nav />
       </div>
-      <div className=" flex h-[calc(100vh-4rem)]">
+      <div className=" flex h-[calc(100vh-54px)]">
         
-        <div className=" max-md:hidden w-[22%] custom-scrollbar text-nowrap overflow-y-scroll">
+        <div className=" max-md:hidden custom-scrollbar text-nowrap overflow-y-scroll">
           <SideBar />
         </div>
-
-          <Md_sideBar />
 
         <div className="  w-full overflow-y-scroll">{children}</div>
       </div>
