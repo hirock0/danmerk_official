@@ -22,7 +22,6 @@ export async function POST(req: Request) {
         success: false,
       });
     } else {
-
       const uploadResult = await uploadToCloudinaryLoggedUserImage(userImage);
       if (!uploadResult?.secure_url || !uploadResult?.public_id) {
         return NextResponse.json({
@@ -50,6 +49,7 @@ export async function POST(req: Request) {
 
         const tokenPayload = {
           id: savedUser?.insertedId,
+          name: userToSave?.name,
           email: userToSave?.email,
           role: userToSave?.role,
           image: userToSave?.image?.secure_url,
@@ -72,7 +72,6 @@ export async function POST(req: Request) {
       }
     }
   } catch (error: any) {
-    
     return NextResponse.json(
       { message: error.message, success: false },
       { status: 500 }
